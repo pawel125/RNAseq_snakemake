@@ -18,11 +18,12 @@ The snakemake is created to easily be run on computing clusters with SLURM. For 
 ## Usage:
 
 1. clone this repository
-2. install requirements or remove onwanted programs from `workflow/Snakefile`
-3. update `samples.tsv` file
-4. create conda environment called snakemake, or adjust the name of environment with installed snakemake in the `run_rnaseq_workflow.sh` file. If snakemake is visible globally, comment out line 16
+2. create conda environment called snakemake, or adjust the name of environment with installed snakemake in the `run_rnaseq_workflow.sh` file. If snakemake is visible globally, comment out line 16
+3. install requirements or remove onwanted programs from `workflow/Snakefile`
+4. update `samples.tsv` file
 5. update `workflow/cluster.yml` to fit your cluster configuration
-6. run `./run_rnaseq_workflow.sh`
+6. prepare STAR genome indices and RSeQC ref_file. Update both variables at the top of Snakefile.
+7. run `./run_rnaseq_workflow.sh`
 
 `samples.tsv` is a TSV formatted file with 3 mandatory columns: 
 * library_name - clean name for the final bam file
