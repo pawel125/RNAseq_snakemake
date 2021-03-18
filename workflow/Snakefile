@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 
+star_genome_dir = "~/resources/stargenome_GRCm38_100"
 rseqc_ref = "/home/pkus/resources/rseqc/mm10_RefSeq.chr.bed"
 
 os.makedirs("qc/fastq", exist_ok = True)
@@ -131,7 +132,7 @@ rule star:
         stats = "bams/{library}/Log.final.out"
     threads: 12
     params:
-        genome_dir = "~/resources/stargenome_GRCm38_100"
+        genome_dir = star_genome_dir
     shell:
         """
         ulimit -n 10000
