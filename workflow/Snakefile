@@ -8,7 +8,7 @@ os.makedirs("qc/fastq", exist_ok = True)
 os.makedirs("qc/trimmed", exist_ok = True)
 os.makedirs("qc/bam", exist_ok = True)
 
-samples = pd.read_csv("samples.tsv", sep = "\t")
+samples = pd.read_csv("samples.tsv", sep = "\t", comment='#')
 samples["filename"] = samples.library_name + "_" + samples.read_file
 
 fastq_files = dict(zip(samples.filename, samples.fastq_gz))
@@ -24,7 +24,8 @@ rule all:
         "counts/counts.all.tsv",
         "qc/fastq.multiqc_report.html",
         "qc/trimmed.multiqc_report.html",
-        "qc/bam.multiqc_report.html"
+        "qc/bam.multiqc_report.html",
+        "qc/FastqScreen_trimmed.png"
 
 
 rule make_links:
@@ -104,6 +105,13 @@ rule fastq_screen_2:
             --threads {threads} \\
             {input}
         """
+
+
+rule gether_fastq_screen:
+    input: expand("qc/trimmed/{library}_R{n}_val_{n}_screen.txt", library=samples.library_name, n=[1,2])
+    output: "qc/FastqScreen_trimmed.png"
+    conda: "R_env.yaml"
+    script: "gather_fastqscreen.R"
 
 
 rule multiqc_2:

@@ -31,6 +31,11 @@ fastq_screen_2:
     cpus: 20
     partition: phi
     output: outputs/fastq_screen_2_%A.txt
+gether_fastq_screen:
+    job_name: gather_screen
+    cpus: 20
+    partition: phi
+    output: outputs/gether_fastq_screen_%A.txt
 trimming:
     job_name: trimming
     cpus: 20
@@ -87,17 +92,7 @@ get_counts_deduplicated:
     partition: phi
     output: outputs/get_counts_deduplicated_%A.txt
 get_counts_all:
-    job_name: get_counts_all
+    job_name: get_counts_raw
     cpus: 10
     partition: phi
-    output: outputs/get_counts_all_%A.txt
-get_counts_s1:
-    job_name: get_counts_s1
-    cpus: 10
-    partition: phi
-    output: outputs/get_counts_s1_%A.txt
-get_counts_s2:
-    job_name: get_counts_s2
-    cpus: 10
-    partition: phi
-    output: outputs/get_counts_s2_%A.txt
+    output: outputs/get_counts_raw_%A.txt
